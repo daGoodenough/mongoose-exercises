@@ -9,7 +9,7 @@ const personSchema = new Schema({
   weight: Number,
   salary: Number,
   numKids: Number,
-  kids: [String]
+  kids: []
 })
 
 const Person = mongoose.model("Person", personSchema)
