@@ -169,12 +169,50 @@ and your server is running do the following:
 /*People
 ----------------------*/
 //1. Find all the people who are tall (>180) AND rich (>30000)
-
+// Person.find({height: {$gt: 180}, salary: {$gt: 30000}}, (err,people) => console.log(people))
 
 //2. Find all the people who are tall (>180) OR rich (>30000)
-
+// Person.find(
+//   {$or: 
+//     [
+//       {height: {$gt: 180}}, 
+//       {salary: {$gt: 30000}}
+//     ]
+//   }, (err, people) => {
+//     console.log(people)
+//   })
 //3. Find all the people who have grey hair or eyes, and who's weight (<70)
 
-//4. Find people who have at least 1 kid with grey hair
+// Person.find(
+//   {
+//     $or: 
+//       [
+//         {hair: 'grey'},
+//         {eyes: 'grey'}
+//       ],
+//     weight: {$lt: 70}
+//   },
+//   (err, poeple) => {
+//     console.log(poeple)
+//   }
+// )
 
+//4. Find people who have at least 1 kid with grey hair
+// Person.find(
+//   {kids: {$elemMatch: {hair: 'grey'}}}, (err, people) => {
+//     people.forEach(person => console.log(person.kids))
+//   })
 //5. Find all the people who have at least one kid who's weight is >100 and themselves' weight is >100
+// Person.find(
+//   {
+//     kids: {$elemMatch: {weight: {$gt: 100}}},
+//     weight: {$gte: 100}
+//   },
+//   (err, people) => {
+//     console.log(people)
+//     // return people;
+//   }
+// )
+// .count((err, count) => {
+//   console.log("Count: ", count)
+// })
