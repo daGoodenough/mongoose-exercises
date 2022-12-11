@@ -13,6 +13,7 @@ const Book = require("./models/BookModel")
 const Person = require("./models/PersonModel")
 
 mongoose.connect("mongodb://localhost/mongoose-exercises")
+mongoose.set('strictQuery', false);
 
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
@@ -58,7 +59,7 @@ isbns.forEach((i) => {
   for subsequent runs, re-comment it so that it runs only once!
   that said, there is a fail-safe to avoid duplicates below
   =======================================================*/
-  loadFromAPI(apiURL)
+  // loadFromAPI(apiURL)
 });
 
 
@@ -144,15 +145,31 @@ and your server is running do the following:
 /*Books
 ----------------------*/
 //1. Find books with fewer than 500 but more than 200 pages
+// Book.find({pages: {$lt: 500, $gt: 200}}, (err, books) => {
+//   if (err) {
+//     console.error(err)
+//   }
+//   console.log(books)
+// })
 
 //2. Find books whose rating is less than 5, and sort by the author's name
+// const query1 = Book.find({rating: {$lt: 5}})
+// query1.sort('-author')
+// query1.exec().then(books => console.log(books))
 
 //3. Find all the Fiction books, skip the first 2, and display only 3 of them
+
+// const query2 = Book.find({genres: 'Fiction'})
+
+// query2.skip(2).limit(3);
+
+// query2.exec().then(books => console.log(books))
 
 
 /*People
 ----------------------*/
 //1. Find all the people who are tall (>180) AND rich (>30000)
+
 
 //2. Find all the people who are tall (>180) OR rich (>30000)
 
